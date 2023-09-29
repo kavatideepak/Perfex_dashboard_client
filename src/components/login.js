@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {FiEyeOff, FiEye} from 'react-icons/fi'
 import axios from 'axios'
@@ -15,6 +15,23 @@ const Login = () => {
   const onShowPaaword =()=>{
     setShowPassword(!showPassword)
   }
+
+  useEffect(()=>{
+    let token = localStorage.getItem('token')
+
+    if(token !== undefined){
+     let empType = localStorage.getItem('employeType')
+      if(empType === 'Admin'){
+        navigate('/admin')
+      }
+      if(empType === 'Trainer'){
+        navigate('/trainer')
+      }
+      if(empType === 'Trainee'){
+        navigate('/trainee')
+      }
+    }
+  })
 
  
   const onSubmitBtn = (e) => {
